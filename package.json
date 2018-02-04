@@ -1,7 +1,7 @@
 {
   "name": "generator-ts-node-starter",
-  "version": "0.0.0",
-  "description": "",
+  "version": "1.0.0",
+  "description": "Generator for ts-node-starter repository",
   "main": "build/index.js",
   "types": "types/index.d.ts",
   "license": "MIT",
