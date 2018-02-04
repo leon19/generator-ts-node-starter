@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+yarn --silent clean
+mkdir build
+cp -rf src node_modules .npmignore package.json tsconfig.json yarn.lock LICENSE README.md CHANGELOG.md build
+cd build
+
+yarn --silent build --outDir .
+
+sed -i -e 's/build\/index/index/g' package.json

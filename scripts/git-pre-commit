@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+yarn --silent lint
+
+files=$(git diff --cached --name-only --diff-filter=ACMR "*.ts")
+
+echo $files | xargs -r npx prettier --write --loglevel=silent
+echo $files | xargs -r git add

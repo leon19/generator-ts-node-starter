@@ -1,0 +1,6 @@
+{
+  "mocha.files.glob": "tests/**/*.{test,spec}.ts",
+  "mocha.requires": [
+    "tests/entry"
+  ]
+}
