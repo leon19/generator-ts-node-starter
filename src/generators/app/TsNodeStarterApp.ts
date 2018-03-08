@@ -1,15 +1,15 @@
+import chalk from 'chalk';
+import fs from 'fs-extra';
+import moment from 'moment';
 import os from 'os';
 import path from 'path';
-import fs from 'fs-extra';
-import chalk from 'chalk';
-import moment from 'moment';
 import Generator from 'yeoman-generator';
-import { Prompter } from './Prompter';
 import { Options } from './options';
+import { Prompter } from './Prompter';
 
 export class TsNodeStarterApp extends Generator {
-  private _prompter = new Prompter(this);
   private _options = new Options();
+  private _prompter = new Prompter(this);
   private _repoClonePath = fs.mkdtempSync(path.join(os.tmpdir(), 'ts-node-starter-'));
   private _repoUrl = 'https://github.com/leon19/ts-node-starter';
   private _repoBranch = 'master';
@@ -40,8 +40,8 @@ export class TsNodeStarterApp extends Generator {
     this._updatePackageJson();
   }
 
-  install() {
-    this.installDependencies({ yarn: true, npm: false, bower: false });
+  async install() {
+    await this.installDependencies({ yarn: true, npm: false, bower: false });
   }
 
   end() {
@@ -79,12 +79,12 @@ export class TsNodeStarterApp extends Generator {
 
   private _updatePackageJson() {
     this.fs.extendJSON(this.destinationPath('package.json'), {
-      version: '0.0.0',
-      name: this._options.project.name,
-      description: this._options.project.description || undefined,
       author: this._getAuthor(),
+      description: this._options.project.description || undefined,
       license: 'UNLICENSED',
-      repository: undefined
+      name: this._options.project.name,
+      repository: undefined,
+      version: '0.0.0'
     });
   }
 
@@ -110,8 +110,8 @@ export class TsNodeStarterApp extends Generator {
 
   private _getAuthor() {
     const author = {
-      name: this._options.author.name || undefined,
-      email: this._options.author.email || undefined
+      email: this._options.author.email || undefined,
+      name: this._options.author.name || undefined
     };
 
     return author.name || author.email ? author : undefined;

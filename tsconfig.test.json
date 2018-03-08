@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./build/tests",
+    "rootDir": ".",
+    "noEmit": true,
+    "types": [
+      "node",
+      "mocha"
+    ]
+  },
+  "include": [
+    "./src",
+    "./tests"
+  ]
+}

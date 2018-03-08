@@ -1,4 +1,4 @@
 export class Project {
-  name = '';
   description = '';
+  name = '';
 }

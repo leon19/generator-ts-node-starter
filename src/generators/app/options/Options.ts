@@ -1,7 +1,7 @@
-import { Project } from './Project';
 import { Author } from './Author';
+import { Project } from './Project';
 
 export class Options {
-  project = new Project();
   author = new Author();
+  project = new Project();
 }

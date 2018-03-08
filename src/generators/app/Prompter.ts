@@ -6,10 +6,10 @@ export class Prompter {
 
   async askProjectName(): Promise<string> {
     const { name } = await this.generator.prompt({
-      type: 'input',
-      name: 'name',
+      default: kebabCase(this.generator.determineAppname()),
       message: 'Your project name',
-      default: kebabCase(this.generator.determineAppname())
+      name: 'name',
+      type: 'input'
     });
 
     if (isString(name) && name.trim()) {
@@ -21,9 +21,9 @@ export class Prompter {
 
   async askDescription() {
     const { description } = await this.generator.prompt({
-      type: 'input',
+      message: 'Your project description',
       name: 'description',
-      message: 'Your project description'
+      type: 'input'
     });
 
     return isString(description) ? description.trim() : '';
@@ -31,10 +31,10 @@ export class Prompter {
 
   async askAuthorName() {
     const { authorName } = await this.generator.prompt({
-      type: 'input',
-      name: 'authorName',
+      default: this.generator.user.git.name(),
       message: 'Author name',
-      default: this.generator.user.git.name()
+      name: 'authorName',
+      type: 'input'
     });
 
     return isString(authorName) ? authorName.trim() : '';
@@ -42,10 +42,10 @@ export class Prompter {
 
   async askAuthorEmail() {
     const { authorEmail } = await this.generator.prompt({
-      type: 'input',
-      name: 'authorEmail',
+      default: this.generator.user.git.email(),
       message: 'Author email',
-      default: this.generator.user.git.email()
+      name: 'authorEmail',
+      type: 'input'
     });
 
     return isString(authorEmail) ? authorEmail.trim() : '';
