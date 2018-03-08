@@ -1,3 +1,4 @@
+import { isString, kebabCase } from 'lodash';
 import Generator from 'yeoman-generator';
 
 export class Prompter {
@@ -8,10 +9,10 @@ export class Prompter {
       type: 'input',
       name: 'name',
       message: 'Your project name',
-      default: this.generator.determineAppname()
+      default: kebabCase(this.generator.determineAppname())
     });
 
-    if (this._isString(name) && name.trim()) {
+    if (isString(name) && name.trim()) {
       return name.trim();
     }
 
@@ -25,7 +26,7 @@ export class Prompter {
       message: 'Your project description'
     });
 
-    return this._isString(description) ? description.trim() : '';
+    return isString(description) ? description.trim() : '';
   }
 
   async askAuthorName() {
@@ -36,7 +37,7 @@ export class Prompter {
       default: this.generator.user.git.name()
     });
 
-    return this._isString(authorName) ? authorName.trim() : '';
+    return isString(authorName) ? authorName.trim() : '';
   }
 
   async askAuthorEmail() {
@@ -47,10 +48,6 @@ export class Prompter {
       default: this.generator.user.git.email()
     });
 
-    return this._isString(authorEmail) ? authorEmail.trim() : '';
-  }
-
-  private _isString(variable: any): variable is string {
-    return typeof variable === 'string';
+    return isString(authorEmail) ? authorEmail.trim() : '';
   }
 }
