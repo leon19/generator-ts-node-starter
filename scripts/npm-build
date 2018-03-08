@@ -4,7 +4,16 @@ set -e
 
 yarn --silent clean
 mkdir build
-cp -rf src node_modules .npmignore package.json tsconfig.json yarn.lock LICENSE README.md CHANGELOG.md build
+files="src node_modules .npmignore package.json tsconfig.json yarn.lock LICENSE README.md CHANGELOG.md"
+
+# copy only those files that exists
+for f in $files
+do
+  if [ -e $f ]; then
+    cp -rf $f build
+  fi
+done
+
 cd build
 
 yarn --silent build --outDir .
