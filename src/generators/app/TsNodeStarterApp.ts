@@ -55,7 +55,7 @@ export class TsNodeStarterApp extends Generator {
     this.log(chalk.green('> Finished after', Math.round(duration).toString(), 'seconds'));
     this.log();
     this.log(chalk.green('> Add a git remote'));
-    this.log(chalk.white('  git remote set-url origin [url]'));
+    this.log(chalk.white('  git remote add origin [url]'));
     this.log(chalk.white('  git push --set-upstream origin master'));
     this.log();
   }
