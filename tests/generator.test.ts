@@ -58,7 +58,7 @@ describe('Generator ts-node-starter', () => {
     it('should remove example files', () => {
       assert.noFile('src/sum.ts');
       assert.noFile('test/unit');
-      assert.fileContent('src/index.ts', '\n\n');
+      assert.fileContent('src/index.ts', '');
     });
 
     it('should update the README.md', () => {

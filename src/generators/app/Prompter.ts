@@ -1,12 +1,12 @@
-import { isString, kebabCase } from 'lodash';
-import Generator from 'yeoman-generator';
+import { isString } from 'lodash';
+import { Answers, Questions } from 'yeoman-generator';
 
 export class Prompter {
-  constructor(private generator: Generator) {}
+  constructor(private prompt: (questions: Questions) => Promise<Answers>) {}
 
-  async askProjectName(): Promise<string> {
-    const { name } = await this.generator.prompt({
-      default: kebabCase(this.generator.determineAppname()),
+  async askProjectName(defaultName?: string): Promise<string> {
+    const { name } = await this.prompt({
+      default: defaultName,
       message: 'Your project name',
       name: 'name',
       type: 'input'
@@ -20,7 +20,7 @@ export class Prompter {
   }
 
   async askDescription() {
-    const { description } = await this.generator.prompt({
+    const { description } = await this.prompt({
       message: 'Your project description',
       name: 'description',
       type: 'input'
@@ -29,9 +29,9 @@ export class Prompter {
     return isString(description) ? description.trim() : '';
   }
 
-  async askAuthorName() {
-    const { authorName } = await this.generator.prompt({
-      default: this.generator.user.git.name(),
+  async askAuthorName(defaultAuthorName?: string) {
+    const { authorName } = await this.prompt({
+      default: defaultAuthorName,
       message: 'Author name',
       name: 'authorName',
       type: 'input'
@@ -40,9 +40,9 @@ export class Prompter {
     return isString(authorName) ? authorName.trim() : '';
   }
 
-  async askAuthorEmail() {
-    const { authorEmail } = await this.generator.prompt({
-      default: this.generator.user.git.email(),
+  async askAuthorEmail(defaultAuthorEmail?: string) {
+    const { authorEmail } = await this.prompt({
+      default: defaultAuthorEmail,
       message: 'Author email',
       name: 'authorEmail',
       type: 'input'

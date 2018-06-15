@@ -1,25 +1,49 @@
 import chalk from 'chalk';
 import fs from 'fs-extra';
+import { kebabCase } from 'lodash';
 import moment from 'moment';
 import os from 'os';
 import path from 'path';
 import Generator from 'yeoman-generator';
+import { Cli, CliArguments, CliOptions } from './cli';
 import { Options } from './options';
 import { Prompter } from './Prompter';
 
 export class TsNodeStarterApp extends Generator {
   private _options = new Options();
-  private _prompter = new Prompter(this);
+  private _prompter = new Prompter(this.prompt.bind(this));
   private _repoClonePath = fs.mkdtempSync(path.join(os.tmpdir(), 'ts-node-starter-'));
   private _repoUrl = 'https://github.com/leon19/ts-node-starter';
   private _repoBranch = 'master';
   private _start = moment();
 
+  private readonly _cli: Cli;
+
+  constructor(args: CliArguments[], opts: CliOptions) {
+    super(args, opts);
+
+    this._cli = { args, opts };
+  }
+
+  private get cliName(): string | undefined {
+    const name = this._cli && this._cli.opts && this._cli.opts.name && kebabCase(this._cli.opts.name.trim());
+
+    return name || undefined;
+  }
+
+  private get gitUser(): string | undefined {
+    return this.user.git.name() || undefined;
+  }
+
+  private get gitEMail(): string | undefined {
+    return this.user.git.email() || undefined;
+  }
+
   async prompting() {
-    this._options.project.name = await this._prompter.askProjectName();
+    this._options.project.name = await this._prompter.askProjectName(this.cliName);
     this._options.project.description = await this._prompter.askDescription();
-    this._options.author.name = await this._prompter.askAuthorName();
-    this._options.author.email = await this._prompter.askAuthorEmail();
+    this._options.author.name = await this._prompter.askAuthorName(this.gitUser);
+    this._options.author.email = await this._prompter.askAuthorEmail(this.gitEMail);
   }
 
   async configuring() {
@@ -31,6 +55,8 @@ export class TsNodeStarterApp extends Generator {
 
     const duration = moment.duration(moment().diff(start)).asSeconds();
     this.log(chalk.green('> Repository fetched after', Math.round(duration).toString(), 'seconds'));
+
+    this.destinationPath(this.destinationRoot(this.destinationPath(this._options.project.name)));
   }
 
   writing() {
@@ -40,8 +66,9 @@ export class TsNodeStarterApp extends Generator {
     this._updatePackageJson();
   }
 
-  async install() {
-    await this.installDependencies({ yarn: true, npm: false, bower: false });
+  install() {
+    // do not make this function async or return the generated promise because it will fail for some unknown reason
+    this.installDependencies({ yarn: true, npm: false, bower: false });
   }
 
   end() {
@@ -105,7 +132,7 @@ export class TsNodeStarterApp extends Generator {
     this.fs.delete(this.destinationPath('src/sum.ts'));
     this.fs.delete(this.destinationPath('LICENSE'));
     this.fs.delete(this.destinationPath('tests/unit'));
-    this.fs.write(this.destinationPath('src/index.ts'), '\n\n');
+    this.fs.write(this.destinationPath('src/index.ts'), '');
   }
 
   private _getAuthor() {

@@ -4,7 +4,6 @@ Generates a base TypeScript Node.JS from the [ts-node-starter](https://github.co
 
 ```shell
 npm install -g yo generator-ts-node-starter
-mkdir app
-cd app
-yo ts-node-starter
+yo ts-node-starter --name [your-app-name]
+cd [your-app-name]
 ```
