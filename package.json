@@ -53,7 +53,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf build reports types",
+    "clean": "rm -rf build reports",
     "test": "mocha --require tests/entry 'tests/**/*.{test,spec}.ts'",
     "cover": "nyc yarn test",
     "lint": "tslint '{src,tests}/**/*.{js,ts}'",
