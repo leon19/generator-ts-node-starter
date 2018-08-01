@@ -57,6 +57,10 @@ export class TsNodeStarterApp extends Generator {
     this.log(chalk.green('> Repository fetched after', Math.round(duration).toString(), 'seconds'));
 
     this.destinationPath(this.destinationRoot(this.destinationPath(this._options.project.name)));
+
+    this.log();
+    this.log(chalk.green('> Initializing git...'));
+    this._gitInit();
   }
 
   writing() {
@@ -72,9 +76,7 @@ export class TsNodeStarterApp extends Generator {
   }
 
   end() {
-    this.log();
-    this.log(chalk.green('> Initializing git...'));
-    this._initGit();
+    this._gitCommit();
 
     const duration = moment.duration(moment().diff(this._start)).asSeconds();
 
@@ -82,16 +84,19 @@ export class TsNodeStarterApp extends Generator {
     this.log(chalk.green('> Finished after', Math.round(duration).toString(), 'seconds'));
     this.log();
     this.log(chalk.green('> Add a git remote'));
+    this.log(chalk.white(`  cd ${this._options.project.name}`));
     this.log(chalk.white('  git remote add origin [url]'));
     this.log(chalk.white('  git push --set-upstream origin master'));
     this.log();
   }
 
-  private _initGit() {
+  private _gitInit() {
     this.spawnCommandSync('git', ['init', '--quiet']);
+  }
+
+  private _gitCommit() {
     this.spawnCommandSync('git', ['add', '.']);
-    this.spawnCommandSync('git', ['commit', '--quiet', '-m', 'chore: initial commit']);
-    this.spawnCommandSync('yarn', ['--silent', 'git:hooks']);
+    this.spawnCommandSync('git', ['commit', '--quiet', '-am', 'chore: initial commit']);
   }
 
   private async _cloneRepository() {
