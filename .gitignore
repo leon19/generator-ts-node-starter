@@ -1,5 +1,3 @@
-/build/
+/generators
 /node_modules/
 /reports/
-*.log
-/*.tgz

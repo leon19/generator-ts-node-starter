@@ -1,7 +1,0 @@
-/.npmignore
-/src
-/tsconfig.json
-
-
-!*.js
-!*d.ts
