@@ -1,7 +1,6 @@
 import chalk from 'chalk';
 import fs from 'fs-extra';
 import { kebabCase } from 'lodash';
-import moment from 'moment';
 import os from 'os';
 import path from 'path';
 import Generator from 'yeoman-generator';
@@ -15,7 +14,7 @@ export class TsNodeStarterApp extends Generator {
   private _repoClonePath = fs.mkdtempSync(path.join(os.tmpdir(), 'ts-node-starter-'));
   private _repoUrl = 'https://github.com/leon19/ts-node-starter';
   private _repoBranch = 'master';
-  private _start = moment();
+  private _start = new Date();
 
   private readonly _cli: Cli;
 
@@ -47,13 +46,13 @@ export class TsNodeStarterApp extends Generator {
   }
 
   async configuring() {
-    const start = moment();
+    const start = new Date();
     this.log();
     this.log(chalk.green('> Fetching base repository...'));
 
     await this._cloneRepository();
 
-    const duration = moment.duration(moment().diff(start)).asSeconds();
+    const duration = getDuration(start);
     this.log(chalk.green('> Repository fetched after', Math.round(duration).toString(), 'seconds'));
 
     this.destinationPath(this.destinationRoot(this.destinationPath(this._options.project.name)));
@@ -78,7 +77,7 @@ export class TsNodeStarterApp extends Generator {
   end() {
     this._gitCommit();
 
-    const duration = moment.duration(moment().diff(this._start)).asSeconds();
+    const duration = getDuration(this._start);
 
     this.log();
     this.log(chalk.green('> Finished after', Math.round(duration).toString(), 'seconds'));
@@ -148,4 +147,8 @@ export class TsNodeStarterApp extends Generator {
 
     return author.name || author.email ? author : undefined;
   }
+}
+
+function getDuration(start: Date): number {
+  return (Date.now() - start.getTime()) / 1000;
 }
