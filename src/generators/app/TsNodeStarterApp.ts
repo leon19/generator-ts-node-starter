@@ -95,7 +95,7 @@ export class TsNodeStarterApp extends Generator {
 
   private _gitCommit() {
     this.spawnCommandSync('git', ['add', '.']);
-    this.spawnCommandSync('git', ['commit', '--quiet', '-am', 'chore: initial commit']);
+    this.spawnCommandSync('git', ['commit', '--quiet', '-am', 'chore: initial commit', '--no-verify']);
   }
 
   private async _cloneRepository() {
