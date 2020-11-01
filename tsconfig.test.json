@@ -4,13 +4,7 @@
     "outDir": "./build/tests",
     "rootDir": ".",
     "noEmit": true,
-    "types": [
-      "node",
-      "mocha"
-    ]
+    "types": ["node", "mocha"]
   },
-  "include": [
-    "./src",
-    "./tests"
-  ]
+  "include": ["./src", "./tests"]
 }

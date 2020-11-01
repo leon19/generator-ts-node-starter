@@ -7,9 +7,8 @@
   ],
   "exclude": [
     "**/*.d.ts",
-    "lib/**",
-    "esm/**",
-    "lib/**/*.test.ts",
+    "generators/**",
+    "build/**",
     "tests/**",
     "node_modules/**"
   ],
