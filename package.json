@@ -65,7 +65,6 @@
     "health": "npm  && npm run clean && npm run lint && npm run build -- --noEmit && npm test -- --reporter dot",
     "release": "standard-version",
     "release:major": "npm run release -- --release-as major",
-    "prepublishOnly": "npm run build",
-    "semantic-release": "semantic-release"
+    "prepublishOnly": "npm run build"
   }
 }
