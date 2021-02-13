@@ -57,15 +57,15 @@
   },
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf build reports",
+    "clean": "rm -rf build reports tsconfig.tsbuildinfo",
     "test": "mocha --require tests/entry 'tests/**/*.{test,spec}.ts'",
-    "cover": "nyc yarn test",
+    "cover": "nyc npm test",
     "lint": "eslint '{src,tests}/**/*.{js,ts}'",
-    "lint:format": "prettier --write '{src,tests}/**/*.{js,ts}' && yarn lint --fix",
-    "health": "yarn && yarn clean && yarn lint && yarn build --noEmit && yarn test --reporter dot",
+    "lint:format": "prettier --write '{src,tests}/**/*.{js,ts}' && npm run lint -- --fix",
+    "health": "npm  && npm run clean && npm run lint && npm run build -- --noEmit && npm test -- --reporter dot",
     "release": "standard-version",
-    "release:major": "yarn release --release-as major",
-    "prepublishOnly": "yarn build",
+    "release:major": "npm run release -- --release-as major",
+    "prepublishOnly": "npm run build",
     "semantic-release": "semantic-release"
   }
 }

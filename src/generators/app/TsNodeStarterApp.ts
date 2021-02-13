@@ -71,7 +71,7 @@ export class TsNodeStarterApp extends Generator {
 
   install() {
     // do not make this function async or return the generated promise because it will fail for some unknown reason
-    this.installDependencies({ yarn: true, npm: false, bower: false });
+    this.installDependencies({ yarn: false, npm: true, bower: false });
   }
 
   end() {
@@ -121,13 +121,7 @@ export class TsNodeStarterApp extends Generator {
 
   private _updateReadme() {
     const readmePath = this.destinationPath('README.md');
-    const readmeContent = [
-      '# ' + this._options.project.name,
-      ...this.fs
-        .read(readmePath)
-        .split('\n')
-        .slice(1)
-    ].join('\n');
+    const readmeContent = ['# ' + this._options.project.name, ...this.fs.read(readmePath).split('\n').slice(1)].join('\n');
 
     this.fs.write(readmePath, readmeContent);
   }
