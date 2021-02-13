@@ -18,7 +18,8 @@
     "generators"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=14",
+    "npm": ">=7"
   },
   "dependencies": {
     "chalk": "^4.1.0",
