@@ -1,8 +1,8 @@
+import os from 'os';
+import path from 'path';
 import chalk from 'chalk';
 import fs from 'fs-extra';
 import { kebabCase } from 'lodash';
-import os from 'os';
-import path from 'path';
 import Generator from 'yeoman-generator';
 import { Cli, CliArguments, CliOptions } from './cli';
 import { Options } from './options';
@@ -38,14 +38,14 @@ export class TsNodeStarterApp extends Generator {
     return this.user.git.email() || undefined;
   }
 
-  async prompting() {
+  async prompting(): Promise<void> {
     this._options.project.name = await this._prompter.askProjectName(this.cliName);
     this._options.project.description = await this._prompter.askDescription();
     this._options.author.name = await this._prompter.askAuthorName(this.gitUser);
     this._options.author.email = await this._prompter.askAuthorEmail(this.gitEMail);
   }
 
-  async configuring() {
+  async configuring(): Promise<void> {
     const start = new Date();
     this.log();
     this.log(chalk.green('> Fetching base repository...'));
@@ -62,19 +62,19 @@ export class TsNodeStarterApp extends Generator {
     this._gitInit();
   }
 
-  writing() {
+  writing(): void {
     this._copyRepository();
     this._updateReadme();
     this._removeExampleFiles();
     this._updatePackageJson();
   }
 
-  install() {
+  install(): void {
     // do not make this function async or return the generated promise because it will fail for some unknown reason
     this.installDependencies({ yarn: false, npm: true, bower: false });
   }
 
-  end() {
+  end(): void {
     this._gitCommit();
 
     const duration = getDuration(this._start);
@@ -106,6 +106,7 @@ export class TsNodeStarterApp extends Generator {
   private _copyRepository() {
     this.fs.copy(this._repoClonePath, this.destinationPath());
     this.fs.copy(path.join(this._repoClonePath, '.*'), this.destinationPath());
+    this.fs.copy(path.join(this._repoClonePath, '.husky/*'), this.destinationPath('.husky'));
   }
 
   private _updatePackageJson() {

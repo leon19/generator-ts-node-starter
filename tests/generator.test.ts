@@ -27,7 +27,7 @@ describe('Generator ts-node-starter', () => {
         .withOptions({ skipInstall: true });
     });
 
-    it('should remove the LICENCE file', () => {
+    it('should remove the LICENSE file', () => {
       assert.noFile('LICENSE');
     });
 
@@ -67,6 +67,11 @@ describe('Generator ts-node-starter', () => {
 
     it('should initialize a git repository', () => {
       assert.file('.git');
+    });
+
+    it('should copy the .husky folder', () => {
+      assert.file('.husky/pre-commit');
+      assert.file('.husky/post-commit');
     });
   });
 
