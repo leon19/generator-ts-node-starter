@@ -66,5 +66,10 @@
     "release:major": "npm run release -- --release-as major",
     "prepublishOnly": "npm run build",
     "prepare": "husky install || exit 0"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
   }
 }
