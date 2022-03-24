@@ -1,17 +1,20 @@
-import os from 'os';
-import path from 'path';
+import { tmpdir } from 'os';
+import { join } from 'path';
 import chalk from 'chalk';
-import fs from 'fs-extra';
-import { kebabCase } from 'lodash';
+import { mkdtempSync, removeSync } from 'fs-extra';
+import { extend, kebabCase } from 'lodash';
 import Generator from 'yeoman-generator';
 import { Cli, CliArguments, CliOptions } from './cli';
 import { Options } from './options';
 import { Prompter } from './Prompter';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+extend(Generator.prototype, require('yeoman-generator/lib/actions/install'));
+
 export class TsNodeStarterApp extends Generator {
   private _options = new Options();
   private _prompter = new Prompter(this.prompt.bind(this));
-  private _repoClonePath = fs.mkdtempSync(path.join(os.tmpdir(), 'ts-node-starter-'));
+  private _repoClonePath = mkdtempSync(join(tmpdir(), 'ts-node-starter-'));
   private _repoUrl = 'https://github.com/leon19/ts-node-starter';
   private _repoBranch = 'master';
   private _start = new Date();
@@ -45,12 +48,12 @@ export class TsNodeStarterApp extends Generator {
     this._options.author.email = await this._prompter.askAuthorEmail(this.gitEMail);
   }
 
-  async configuring(): Promise<void> {
+  configuring(): void {
     const start = new Date();
     this.log();
     this.log(chalk.green('> Fetching base repository...'));
 
-    await this._cloneRepository();
+    this._cloneRepository();
 
     const duration = getDuration(start);
     this.log(chalk.green('> Repository fetched after', Math.round(duration).toString(), 'seconds'));
@@ -85,12 +88,13 @@ export class TsNodeStarterApp extends Generator {
     this.log(chalk.green('> Add a git remote'));
     this.log(chalk.white(`  cd ${this._options.project.name}`));
     this.log(chalk.white('  git remote add origin [url]'));
-    this.log(chalk.white('  git push --set-upstream origin master'));
+    this.log(chalk.white('  git push --set-upstream origin main'));
     this.log();
   }
 
   private _gitInit() {
     this.spawnCommandSync('git', ['init', '--quiet']);
+    this.spawnCommandSync('git', ['branch', '-M', 'main']);
   }
 
   private _gitCommit() {
@@ -98,15 +102,16 @@ export class TsNodeStarterApp extends Generator {
     this.spawnCommandSync('git', ['commit', '--quiet', '-am', 'chore: initial commit', '--no-verify']);
   }
 
-  private async _cloneRepository() {
+  private _cloneRepository() {
     this.spawnCommandSync('git', ['clone', '--quiet', '--depth=1', '-b', this._repoBranch, this._repoUrl, this._repoClonePath]);
-    await fs.remove(path.join(this._repoClonePath, '.git'));
+    removeSync(join(this._repoClonePath, '.git'));
   }
 
   private _copyRepository() {
+    this.fs.copy(join(this._repoClonePath, '.*'), this.destinationPath());
+    this.fs.copy(join(this._repoClonePath, '.husky/*'), this.destinationPath('.husky'));
+    this.fs.copy(join(this._repoClonePath, '.vscode/*'), this.destinationPath('.vscode'));
     this.fs.copy(this._repoClonePath, this.destinationPath());
-    this.fs.copy(path.join(this._repoClonePath, '.*'), this.destinationPath());
-    this.fs.copy(path.join(this._repoClonePath, '.husky/*'), this.destinationPath('.husky'));
   }
 
   private _updatePackageJson() {
@@ -116,7 +121,7 @@ export class TsNodeStarterApp extends Generator {
       license: 'UNLICENSED',
       name: this._options.project.name,
       repository: undefined,
-      version: '0.0.0'
+      version: '1.0.0'
     });
   }
 
@@ -131,7 +136,7 @@ export class TsNodeStarterApp extends Generator {
     this.fs.delete(this.destinationPath('src/sum.ts'));
     this.fs.delete(this.destinationPath('LICENSE'));
     this.fs.delete(this.destinationPath('tests/unit'));
-    this.fs.write(this.destinationPath('src/index.ts'), '');
+    this.fs.write(this.destinationPath('src/index.ts'), '\n');
   }
 
   private _getAuthor() {

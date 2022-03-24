@@ -1,11 +1,13 @@
-import faker from 'faker';
-import path from 'path';
+import path, { join } from 'path';
+import { faker } from '@faker-js/faker';
 import assert from 'yeoman-assert';
-import helpers from 'yeoman-test';
+import helpers, { RunResult } from 'yeoman-test';
 
 const generatorDir = path.join(__dirname, '../src/generators/app');
 
 describe('Generator ts-node-starter', () => {
+  let runResult: RunResult;
+
   describe('when all the questions are answered', () => {
     const name = faker.lorem.word();
     const description = faker.lorem.sentence();
@@ -13,10 +15,10 @@ describe('Generator ts-node-starter', () => {
     const authorEmail = faker.internet.email();
     const author = { email: authorEmail, name: authorName };
 
-    before(function installGenerator() {
+    before(async function installGenerator() {
       this.timeout(30000);
 
-      return helpers
+      runResult = await helpers
         .run(generatorDir)
         .withPrompts({
           authorEmail: author.email,
@@ -25,6 +27,8 @@ describe('Generator ts-node-starter', () => {
           name
         })
         .withOptions({ skipInstall: true });
+
+      process.chdir(join(runResult.cwd, name));
     });
 
     it('should remove the LICENSE file', () => {
@@ -35,8 +39,8 @@ describe('Generator ts-node-starter', () => {
       assert.jsonFileContent('package.json', { license: 'UNLICENSED' });
     });
 
-    it('should set the "version" to "0.0.0" in package.json', () => {
-      assert.jsonFileContent('package.json', { version: '0.0.0' });
+    it('should set the "version" to "1.0.0" in package.json', () => {
+      assert.jsonFileContent('package.json', { version: '1.0.0' });
     });
 
     it('should update the "name" in the package.json', () => {
@@ -76,16 +80,20 @@ describe('Generator ts-node-starter', () => {
   });
 
   context('when the description is empty', () => {
-    before(function installGenerator() {
+    before(async function installGenerator() {
       this.timeout(30000);
 
-      return helpers
+      const name = faker.lorem.word();
+
+      runResult = await helpers
         .run(generatorDir)
         .withPrompts({
           description: '',
-          name: faker.lorem.word()
+          name
         })
         .withOptions({ skipInstall: true });
+
+      process.chdir(join(runResult.cwd, name));
     });
 
     it('should not set description in the "package.json"', () => {

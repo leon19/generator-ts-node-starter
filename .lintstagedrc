@@ -1,10 +1,5 @@
 {
-  "{src,test}/**/*.{js,ts}": [
-    "eslint --fix",
-    "git add"
-  ],
-  "*.{md,json}": [
-    "prettier --write",
-    "git add"
-  ]
+  "{src,tests}/**/*.ts": ["eslint --fix"],
+  "*.{md,json}": ["prettier --write"],
+  ".{c8rc,eslintrc,lintstagedrc,prettierrc}": ["prettier --write"]
 }
