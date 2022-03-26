@@ -16,7 +16,7 @@ export class TsNodeStarterApp extends Generator {
   private _prompter = new Prompter(this.prompt.bind(this));
   private _repoClonePath = mkdtempSync(join(tmpdir(), 'ts-node-starter-'));
   private _repoUrl = 'https://github.com/leon19/ts-node-starter';
-  private _repoBranch = 'master';
+  private _repoBranch = 'main';
   private _start = new Date();
 
   private readonly _cli: Cli;
@@ -94,7 +94,6 @@ export class TsNodeStarterApp extends Generator {
 
   private _gitInit() {
     this.spawnCommandSync('git', ['init', '--quiet']);
-    this.spawnCommandSync('git', ['branch', '-M', 'main']);
   }
 
   private _gitCommit() {

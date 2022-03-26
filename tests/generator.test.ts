@@ -74,6 +74,7 @@ describe('Generator ts-node-starter', () => {
     });
 
     it('should copy the .husky folder', () => {
+      assert.file('.husky/commit-msg');
       assert.file('.husky/pre-commit');
       assert.file('.husky/post-commit');
     });
