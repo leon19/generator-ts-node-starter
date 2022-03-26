@@ -12,12 +12,6 @@
         "proseWrap": "always",
         "printWidth": 100
       }
-    },
-    {
-      "files": ".{c8rc,lintstagedrc}",
-      "options": {
-        "parser": "json"
-      }
     }
   ]
 }
