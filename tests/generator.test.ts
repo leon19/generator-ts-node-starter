@@ -40,7 +40,7 @@ describe('Generator ts-node-starter', () => {
     });
 
     it('should set the "version" to "1.0.0" in package.json', () => {
-      assert.jsonFileContent('package.json', { version: '1.0.0' });
+      assert.jsonFileContent('package.json', { version: '0.0.0-development' });
     });
 
     it('should update the "name" in the package.json', () => {
@@ -77,6 +77,11 @@ describe('Generator ts-node-starter', () => {
       assert.file('.husky/commit-msg');
       assert.file('.husky/pre-commit');
       assert.file('.husky/post-commit');
+    });
+
+    it('should copy the .github folder', () => {
+      assert.file('.github/workflows/release.yml');
+      assert.file('.github/workflows/test.yml');
     });
   });
 

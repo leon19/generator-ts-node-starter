@@ -109,6 +109,7 @@ export class TsNodeStarterApp extends Generator {
   private _copyRepository() {
     this.fs.copy(join(this._repoClonePath, '.*'), this.destinationPath());
     this.fs.copy(join(this._repoClonePath, '.husky/*'), this.destinationPath('.husky'));
+    this.fs.copy(join(this._repoClonePath, '.github/workflows/*'), this.destinationPath('.github/workflows'));
     this.fs.copy(join(this._repoClonePath, '.vscode/*'), this.destinationPath('.vscode'));
     this.fs.copy(this._repoClonePath, this.destinationPath());
   }
@@ -119,8 +120,7 @@ export class TsNodeStarterApp extends Generator {
       description: this._options.project.description || undefined,
       license: 'UNLICENSED',
       name: this._options.project.name,
-      repository: undefined,
-      version: '1.0.0'
+      repository: undefined
     });
   }
 
