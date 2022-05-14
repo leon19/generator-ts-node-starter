@@ -1,5 +1,5 @@
 import { isString } from 'lodash';
-import { Answers, Questions } from 'yeoman-generator';
+import type { Answers, Questions } from 'yeoman-generator';
 
 export class Prompter {
   constructor(private prompt: (questions: Questions) => Promise<Answers>) {}
@@ -19,7 +19,7 @@ export class Prompter {
     return this.askProjectName();
   }
 
-  async askDescription() {
+  async askDescription(): Promise<string> {
     const { description } = await this.prompt({
       message: 'Your project description',
       name: 'description',
@@ -29,7 +29,7 @@ export class Prompter {
     return isString(description) ? description.trim() : '';
   }
 
-  async askAuthorName(defaultAuthorName?: string) {
+  async askAuthorName(defaultAuthorName?: string): Promise<string> {
     const { authorName } = await this.prompt({
       default: defaultAuthorName,
       message: 'Author name',
@@ -40,7 +40,7 @@ export class Prompter {
     return isString(authorName) ? authorName.trim() : '';
   }
 
-  async askAuthorEmail(defaultAuthorEmail?: string) {
+  async askAuthorEmail(defaultAuthorEmail?: string): Promise<string> {
     const { authorEmail } = await this.prompt({
       default: defaultAuthorEmail,
       message: 'Author email',

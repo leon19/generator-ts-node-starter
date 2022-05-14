@@ -1,12 +1,12 @@
+import { mkdtempSync, rmSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import chalk from 'chalk';
-import { mkdtempSync, removeSync } from 'fs-extra';
 import { extend, kebabCase } from 'lodash';
 import Generator from 'yeoman-generator';
-import { Cli, CliArguments, CliOptions } from './cli';
 import { Options } from './options';
 import { Prompter } from './Prompter';
+import type { Cli, CliArguments, CliOptions } from './cli';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 extend(Generator.prototype, require('yeoman-generator/lib/actions/install'));
@@ -103,7 +103,7 @@ export class TsNodeStarterApp extends Generator {
 
   private _cloneRepository() {
     this.spawnCommandSync('git', ['clone', '--quiet', '--depth=1', '-b', this._repoBranch, this._repoUrl, this._repoClonePath]);
-    removeSync(join(this._repoClonePath, '.git'));
+    rmSync(join(this._repoClonePath, '.git'), { force: true, recursive: true });
   }
 
   private _copyRepository() {
