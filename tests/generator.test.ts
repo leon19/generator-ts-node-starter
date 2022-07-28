@@ -1,7 +1,7 @@
 import path, { join } from 'path';
 import { faker } from '@faker-js/faker';
 import assert from 'yeoman-assert';
-import helpers, { RunResult } from 'yeoman-test';
+import helpers, { type RunResult } from 'yeoman-test';
 
 const generatorDir = path.join(__dirname, '../src/generators/app');
 
@@ -61,7 +61,7 @@ describe('Generator ts-node-starter', () => {
 
     it('should remove example files', () => {
       assert.noFile('src/sum.ts');
-      assert.noFile('test/unit');
+      assert.noFile('src/sum.test.ts');
       assert.fileContent('src/index.ts', '');
     });
 

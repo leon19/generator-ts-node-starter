@@ -133,8 +133,8 @@ export class TsNodeStarterApp extends Generator {
 
   private _removeExampleFiles() {
     this.fs.delete(this.destinationPath('src/sum.ts'));
+    this.fs.delete(this.destinationPath('src/sum.test.ts'));
     this.fs.delete(this.destinationPath('LICENSE'));
-    this.fs.delete(this.destinationPath('tests/unit'));
     this.fs.write(this.destinationPath('src/index.ts'), '\n');
   }
 
