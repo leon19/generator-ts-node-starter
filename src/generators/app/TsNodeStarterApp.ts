@@ -1,6 +1,6 @@
-import { mkdtempSync, rmSync } from 'fs';
-import { tmpdir } from 'os';
-import { join } from 'path';
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import chalk from 'chalk';
 import { extend, kebabCase } from 'lodash';
 import Generator from 'yeoman-generator';

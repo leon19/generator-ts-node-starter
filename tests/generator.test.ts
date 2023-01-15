@@ -1,9 +1,9 @@
-import path, { join } from 'path';
+import { join } from 'node:path';
 import { faker } from '@faker-js/faker';
 import assert from 'yeoman-assert';
 import helpers, { type RunResult } from 'yeoman-test';
 
-const generatorDir = path.join(__dirname, '../src/generators/app');
+const generatorDir = join(__dirname, '../src/generators/app');
 
 describe('Generator ts-node-starter', () => {
   let runResult: RunResult;
