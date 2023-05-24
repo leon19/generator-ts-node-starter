@@ -11,7 +11,7 @@ describe('Generator ts-node-starter', () => {
   describe('when all the questions are answered', () => {
     const name = faker.lorem.word();
     const description = faker.lorem.sentence();
-    const authorName = faker.name.firstName() + faker.name.lastName();
+    const authorName = faker.person.firstName() + faker.person.lastName();
     const authorEmail = faker.internet.email();
     const author = { email: authorEmail, name: authorName };
 
