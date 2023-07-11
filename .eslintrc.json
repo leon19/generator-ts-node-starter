@@ -18,7 +18,7 @@
     "plugin:import/typescript"
   ],
   "parserOptions": {
-    "ecmaVersion": 2021,
+    "ecmaVersion": 2022,
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
@@ -88,7 +88,7 @@
   },
   "overrides": [
     {
-      "files": ["tests/**/*.{test,spec}.ts"],
+      "files": ["src/**/*.{test,spec}.ts"],
       "rules": {
         "no-unused-expressions": "off" // disabled for chai assertions
       }

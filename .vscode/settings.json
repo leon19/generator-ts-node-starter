@@ -21,7 +21,6 @@
     "NODE_ENV": "test"
   },
   "mochaExplorer.files": "tests/**/*.{test,spec}.ts",
-  "eslint.alwaysShowStatus": true,
   "eslint.format.enable": true,
   "eslint.run": "onSave",
   "prettier.enable": true,

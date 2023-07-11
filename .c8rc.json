@@ -1,7 +1,7 @@
 {
   "source": ["src"],
   "extension": [".ts"],
-  "exclude": ["**/*.d.ts"],
+  "exclude": [".mocha.entry.js", "**/*.d.ts", "**/*.test.ts"],
   "reporter": ["clover", "cobertura", "html", "json", "lcov", "text", "text-summary"],
   "clean": true,
   "report-dir": ".tmp/reports/coverage",
