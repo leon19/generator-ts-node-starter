@@ -1,9 +1,11 @@
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import process from 'node:process';
+import { fileURLToPath } from 'node:url';
 import { faker } from '@faker-js/faker';
 import assert from 'yeoman-assert';
 import helpers, { type RunResult } from 'yeoman-test';
 
-const generatorDir = join(__dirname, '../src/generators/app');
+const generatorDir = join(dirname(fileURLToPath(import.meta.url)), '../src/generators/app');
 
 describe('Generator ts-node-starter', () => {
   let runResult: RunResult;
@@ -24,7 +26,7 @@ describe('Generator ts-node-starter', () => {
           authorEmail: author.email,
           authorName: author.name,
           description,
-          name
+          name,
         })
         .withOptions({ skipInstall: true });
 
@@ -66,7 +68,7 @@ describe('Generator ts-node-starter', () => {
     });
 
     it('should update the README.md', () => {
-      assert.fileContent('README.md', '# ' + name);
+      assert.fileContent('README.md', `# ${name}`);
     });
 
     it('should initialize a git repository', () => {
@@ -95,7 +97,7 @@ describe('Generator ts-node-starter', () => {
         .run(generatorDir)
         .withPrompts({
           description: '',
-          name
+          name,
         })
         .withOptions({ skipInstall: true });
 

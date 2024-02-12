@@ -1,3 +1,3 @@
-import { TsNodeStarterApp } from './TsNodeStarterApp';
+import { TsNodeStarterApp } from './TsNodeStarterApp.js';
 
-export = TsNodeStarterApp;
+export default TsNodeStarterApp;

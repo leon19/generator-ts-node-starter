@@ -21,13 +21,11 @@
     "NODE_ENV": "test"
   },
   "mochaExplorer.files": "tests/**/*.{test,spec}.ts",
-  "eslint.format.enable": true,
-  "eslint.run": "onSave",
   "prettier.enable": true,
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "biomejs.biome"
   }
 }

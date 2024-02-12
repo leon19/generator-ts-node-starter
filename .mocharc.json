@@ -1,4 +1,4 @@
 {
   "$schema": "https://json.schemastore.org/mocharc.json",
-  "require": [".mocha.entry.js"]
+  "node-option": ["loader=ts-node/esm", "no-warnings"]
 }

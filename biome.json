@@ -1,0 +1,42 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+
+    "rules": {
+      "recommended": true,
+      "style": {
+        "useShorthandArrayType": "error",
+        "useNamingConvention": "error",
+        "useShorthandAssign": "error"
+      },
+      "suspicious": {
+        "noConsoleLog": "error",
+        "noImplicitAnyLet": "error"
+      },
+      "nursery": {
+        "noUnusedImports": "error",
+        "noUnusedPrivateClassMembers": "error",
+        "useGroupedTypeImport": "error"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120,
+    "lineEnding": "lf",
+    "ignore": []
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "arrowParentheses": "asNeeded"
+    }
+  }
+}
