@@ -1,15 +1,15 @@
-import { isString } from 'lodash';
-import type { Answers, Questions } from 'yeoman-generator';
+import { isString } from 'lodash-es';
+import type Generator from 'yeoman-generator';
 
 export class Prompter {
-  constructor(private prompt: (questions: Questions) => Promise<Answers>) {}
+  constructor(private prompt: Generator['prompt']) {}
 
   async askProjectName(defaultName?: string): Promise<string> {
     const { name } = await this.prompt({
       default: defaultName,
       message: 'Your project name',
       name: 'name',
-      type: 'input'
+      type: 'input',
     });
 
     if (isString(name) && name.trim()) {
@@ -23,7 +23,7 @@ export class Prompter {
     const { description } = await this.prompt({
       message: 'Your project description',
       name: 'description',
-      type: 'input'
+      type: 'input',
     });
 
     return isString(description) ? description.trim() : '';
@@ -34,7 +34,7 @@ export class Prompter {
       default: defaultAuthorName,
       message: 'Author name',
       name: 'authorName',
-      type: 'input'
+      type: 'input',
     });
 
     return isString(authorName) ? authorName.trim() : '';
@@ -45,7 +45,7 @@ export class Prompter {
       default: defaultAuthorEmail,
       message: 'Author email',
       name: 'authorEmail',
-      type: 'input'
+      type: 'input',
     });
 
     return isString(authorEmail) ? authorEmail.trim() : '';
