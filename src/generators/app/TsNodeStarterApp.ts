@@ -52,7 +52,7 @@ export class TsNodeStarterApp extends Generator {
     this.log();
 
     this.log(chalk.green('> Initializing git...'));
-    this.spawnSync('git', ['init', '--quiet']);
+    this.spawnSync('git', ['init', '--quiet', '--initial-branch', 'main']);
   }
 
   writing(): void {
