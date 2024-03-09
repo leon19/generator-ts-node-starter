@@ -11,11 +11,13 @@
       "style": {
         "useShorthandArrayType": "error",
         "useNamingConvention": "error",
-        "useShorthandAssign": "error"
+        "useShorthandAssign": "error",
+        "noNonNullAssertion": "off"
       },
       "suspicious": {
         "noConsoleLog": "error",
-        "noImplicitAnyLet": "error"
+        "noImplicitAnyLet": "error",
+        "noExplicitAny": "off"
       },
       "nursery": {
         "noUnusedImports": "error",

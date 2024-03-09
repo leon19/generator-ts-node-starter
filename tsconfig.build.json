@@ -1,12 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src/generators",
-    "outDir": "generators",
+    "rootDir": "src",
+    "outDir": "dist",
     "noEmit": false,
-    "tsBuildInfoFile": ".tmp/.tsbuildinfo.build",
     "types": ["node"]
   },
   "include": ["src"],
-  "exclude": ["build", "generators"]
+  "exclude": ["src/**/*.test.ts", "src/**/*.spec.ts"]
 }
