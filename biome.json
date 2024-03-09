@@ -12,17 +12,17 @@
         "useShorthandArrayType": "error",
         "useNamingConvention": "error",
         "useShorthandAssign": "error",
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "useImportType": "error"
       },
       "suspicious": {
         "noConsoleLog": "error",
         "noImplicitAnyLet": "error",
         "noExplicitAny": "off"
       },
-      "nursery": {
+      "correctness": {
         "noUnusedImports": "error",
-        "noUnusedPrivateClassMembers": "error",
-        "useGroupedTypeImport": "error"
+        "noUnusedPrivateClassMembers": "error"
       }
     }
   },
