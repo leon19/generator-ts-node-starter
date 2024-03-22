@@ -1,7 +1,6 @@
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { kebabCase } from 'lodash-es';
 import Generator from 'yeoman-generator';
 import { Prompter } from './Prompter.js';
 import type { Cli, CliArguments, CliOptions } from './cli.js';
@@ -152,4 +151,11 @@ function green(text: string): string {
 
 function white(text: string): string {
   return `\u001b[37m${text}\u001b[39m`;
+}
+
+function kebabCase(value: string): string {
+  return value
+    .replace(/\s+/, '-')
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .toLowerCase();
 }

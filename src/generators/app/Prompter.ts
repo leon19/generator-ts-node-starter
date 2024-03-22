@@ -1,4 +1,3 @@
-import { isString } from 'lodash-es';
 import type Generator from 'yeoman-generator';
 
 export class Prompter {
@@ -50,4 +49,8 @@ export class Prompter {
 
     return isString(authorEmail) ? authorEmail.trim() : '';
   }
+}
+
+function isString(value: unknown): value is string {
+  return typeof value === 'string';
 }
