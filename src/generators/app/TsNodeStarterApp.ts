@@ -1,7 +1,6 @@
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import chalk from 'chalk';
 import { kebabCase } from 'lodash-es';
 import Generator from 'yeoman-generator';
 import { Prompter } from './Prompter.js';
@@ -40,18 +39,18 @@ export class TsNodeStarterApp extends Generator {
   configuring(): void {
     const start = new Date();
     this.log();
-    this.log(chalk.green('> Fetching base repository...'));
+    this.log(green('> Fetching base repository...'));
 
     this._cloneRepository();
 
     const duration = getDuration(start);
-    this.log(chalk.green('> Repository fetched after', Math.round(duration).toString(), 'seconds'));
+    this.log(green(`> Repository fetched after${Math.ceil(duration)}seconds`));
 
     this.destinationPath(this.destinationRoot(this.destinationPath(this.#options.project.name)));
 
     this.log();
 
-    this.log(chalk.green('> Initializing git...'));
+    this.log(green('> Initializing git...'));
     this.spawnSync('git', ['init', '--quiet', '--initial-branch', 'main']);
   }
 
@@ -68,12 +67,12 @@ export class TsNodeStarterApp extends Generator {
     const duration = getDuration(this.#start);
 
     this.log();
-    this.log(chalk.green('> Finished after', Math.round(duration).toString(), 'seconds'));
+    this.log(green(`> Finished after${Math.ceil(duration)}seconds`));
     this.log();
-    this.log(chalk.green('> Add a git remote'));
-    this.log(chalk.white(`  cd ${this.#options.project.name}`));
-    this.log(chalk.white('  git remote add origin [url]'));
-    this.log(chalk.white('  git push --set-upstream origin main'));
+    this.log(green('> Add a git remote'));
+    this.log(white(`  cd ${this.#options.project.name}`));
+    this.log(white('  git remote add origin [url]'));
+    this.log(white('  git push --set-upstream origin main'));
     this.log();
   }
 
@@ -145,4 +144,12 @@ export class TsNodeStarterApp extends Generator {
 
 function getDuration(start: Date): number {
   return (Date.now() - start.getTime()) / 1000;
+}
+
+function green(text: string): string {
+  return `\u001b[32m${text}\u001b[39m`;
+}
+
+function white(text: string): string {
+  return `\u001b[37m${text}\u001b[39m`;
 }
