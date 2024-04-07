@@ -5,12 +5,10 @@
   },
   "linter": {
     "enabled": true,
-
     "rules": {
       "recommended": true,
       "style": {
         "useShorthandArrayType": "error",
-        "useNamingConvention": "error",
         "useShorthandAssign": "error",
         "noNonNullAssertion": "off",
         "useImportType": "error"
