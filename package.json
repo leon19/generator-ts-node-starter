@@ -19,7 +19,7 @@
     "npm": ">=10"
   },
   "dependencies": {
-    "yeoman-generator": "^7.2.0"
+    "yeoman-generator": "^7.3.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.1",
