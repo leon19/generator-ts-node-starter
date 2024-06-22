@@ -22,12 +22,12 @@
     "yeoman-generator": "^7.3.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.1",
+    "@biomejs/biome": "1.8.2",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@faker-js/faker": "^8.4.1",
     "@types/chai": "^4.3.16",
-    "@types/mocha": "^10.0.6",
+    "@types/mocha": "^10.0.7",
     "@types/node": "*",
     "@types/yeoman-assert": "^3.1.4",
     "@types/yeoman-generator": "^5.2.14",
@@ -40,7 +40,7 @@
     "prettier": "^3.3.2",
     "semantic-release": "^24.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.2",
     "yeoman-assert": "^3.1.1",
     "yeoman-environment": "^4.4.1",
     "yeoman-test": "^8.3.0"
