@@ -43,7 +43,7 @@
     "typescript": "^5.5.4",
     "yeoman-assert": "^3.1.1",
     "yeoman-environment": "^4.4.1",
-    "yeoman-test": "^8.3.0"
+    "yeoman-test": "^9.0.0"
   },
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
