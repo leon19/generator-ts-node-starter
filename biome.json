@@ -11,7 +11,11 @@
         "useShorthandArrayType": "error",
         "useShorthandAssign": "error",
         "noNonNullAssertion": "off",
-        "useImportType": "error"
+        "useImportType": "error",
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": { "filenameCases": ["kebab-case"] }
+        }
       },
       "suspicious": {
         "noConsoleLog": "error",
