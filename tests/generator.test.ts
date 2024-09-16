@@ -22,7 +22,7 @@ describe('Generator ts-node-starter', () => {
 
       runResult = await helpers
         .run(generatorDir)
-        .withPrompts({
+        .withAnswers({
           authorEmail: author.email,
           authorName: author.name,
           description,
