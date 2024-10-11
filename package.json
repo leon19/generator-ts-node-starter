@@ -22,12 +22,12 @@
     "yeoman-generator": "^7.3.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.1",
+    "@biomejs/biome": "1.9.3",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
-    "@faker-js/faker": "^9.0.1",
-    "@types/chai": "^4.3.19",
-    "@types/mocha": "^10.0.8",
+    "@faker-js/faker": "^9.0.3",
+    "@types/chai": "^5.0.0",
+    "@types/mocha": "^10.0.9",
     "@types/node": "*",
     "@types/yeoman-assert": "^3.1.4",
     "@types/yeoman-generator": "^5.2.14",
@@ -38,12 +38,12 @@
     "lint-staged": "^15.2.10",
     "mocha": "^10.7.3",
     "prettier": "^3.3.3",
-    "semantic-release": "^24.1.1",
+    "semantic-release": "^24.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.2",
+    "typescript": "^5.6.3",
     "yeoman-assert": "^3.1.1",
-    "yeoman-environment": "^4.4.1",
-    "yeoman-test": "^9.1.0"
+    "yeoman-environment": "^4.4.2",
+    "yeoman-test": "^10.0.0"
   },
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
