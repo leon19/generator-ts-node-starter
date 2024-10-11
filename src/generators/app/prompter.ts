@@ -3,7 +3,7 @@ import type Generator from 'yeoman-generator';
 export class Prompter {
   constructor(private prompt: Generator['prompt']) {}
 
-  async askProjectName(defaultName?: string): Promise<string> {
+  async askProjectName(defaultName = ''): Promise<string> {
     const { name } = await this.prompt({
       default: defaultName,
       message: 'Your project name',
@@ -28,7 +28,7 @@ export class Prompter {
     return isString(description) ? description.trim() : '';
   }
 
-  async askAuthorName(defaultAuthorName?: string): Promise<string> {
+  async askAuthorName(defaultAuthorName = ''): Promise<string> {
     const { authorName } = await this.prompt({
       default: defaultAuthorName,
       message: 'Author name',
@@ -39,7 +39,7 @@ export class Prompter {
     return isString(authorName) ? authorName.trim() : '';
   }
 
-  async askAuthorEmail(defaultAuthorEmail?: string): Promise<string> {
+  async askAuthorEmail(defaultAuthorEmail = ''): Promise<string> {
     const { authorEmail } = await this.prompt({
       default: defaultAuthorEmail,
       message: 'Author email',
