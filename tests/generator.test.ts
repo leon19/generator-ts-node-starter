@@ -1,5 +1,6 @@
 import { dirname, join } from 'node:path';
 import process from 'node:process';
+import { before, describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { faker } from '@faker-js/faker';
 import assert from 'yeoman-assert';
@@ -17,21 +18,22 @@ describe('Generator ts-node-starter', () => {
     const authorEmail = faker.internet.email();
     const author = { email: authorEmail, name: authorName };
 
-    before(async function installGenerator() {
-      this.timeout(30000);
+    before(
+      async function installGenerator() {
+        runResult = await helpers
+          .run(generatorDir)
+          .withAnswers({
+            authorEmail: author.email,
+            authorName: author.name,
+            description,
+            name,
+          })
+          .withOptions({ skipInstall: true });
 
-      runResult = await helpers
-        .run(generatorDir)
-        .withAnswers({
-          authorEmail: author.email,
-          authorName: author.name,
-          description,
-          name,
-        })
-        .withOptions({ skipInstall: true });
-
-      process.chdir(join(runResult.cwd, name));
-    });
+        process.chdir(join(runResult.cwd, name));
+      },
+      { timeout: 30_000 },
+    );
 
     it('should remove the LICENSE file', () => {
       assert.noFile('LICENSE');
@@ -87,22 +89,25 @@ describe('Generator ts-node-starter', () => {
     });
   });
 
-  context('when the description is empty', () => {
-    before(async function installGenerator() {
-      this.timeout(30000);
+  describe('when the description is empty', () => {
+    before(
+      async function installGenerator() {
+        const name = faker.lorem.word();
 
-      const name = faker.lorem.word();
+        runResult = await helpers
+          .run(generatorDir)
+          .withPrompts({
+            description: '',
+            name,
+          })
+          .withOptions({ skipInstall: true });
 
-      runResult = await helpers
-        .run(generatorDir)
-        .withPrompts({
-          description: '',
-          name,
-        })
-        .withOptions({ skipInstall: true });
-
-      process.chdir(join(runResult.cwd, name));
-    });
+        process.chdir(join(runResult.cwd, name));
+      },
+      {
+        timeout: 30_000,
+      },
+    );
 
     it('should not set description in the "package.json"', () => {
       assert.jsonFileContent('package.json', { description: undefined });

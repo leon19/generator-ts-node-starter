@@ -9,18 +9,10 @@
         "args": ["${relativeFile}"],
         "runtimeArgs": ["-r", "ts-node/register"],
         "sourceMaps": true,
-        "cwd": "${workspaceRoot}",
-        "protocol": "inspector"
+        "cwd": "${workspaceRoot}"
       }
     ]
   },
-  "testExplorer.useNativeTesting": true,
-  "testExplorer.addToEditorContextMenu": true,
-  "mochaExplorer.require": ["tests/entry.js"],
-  "mochaExplorer.env": {
-    "NODE_ENV": "test"
-  },
-  "mochaExplorer.files": "tests/**/*.{test,spec}.ts",
   "prettier.enable": true,
   "[json]": {
     "editor.defaultFormatter": "biomejs.biome"
