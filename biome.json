@@ -1,35 +1,36 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedPrivateClassMembers": "error",
+        "useImportExtensions": "on"
+      },
       "style": {
+        "noDefaultExport": "error",
+        "noNonNullAssertion": "off",
         "useConsistentArrayType": {
           "level": "error",
           "options": {
             "syntax": "shorthand"
           }
         },
-        "useShorthandAssign": "error",
-        "noNonNullAssertion": "off",
-        "useImportType": "error",
         "useFilenamingConvention": {
           "level": "error",
-          "options": { "filenameCases": ["kebab-case"] }
-        }
+          "options": {
+            "filenameCases": ["kebab-case"]
+          }
+        },
+        "useImportType": "error",
+        "useShorthandAssign": "error"
       },
       "suspicious": {
-        "noConsoleLog": "error",
-        "noImplicitAnyLet": "error",
-        "noExplicitAny": "off"
-      },
-      "correctness": {
-        "noUnusedImports": "error",
-        "noUnusedPrivateClassMembers": "error"
+        "noConsole": "error",
+        "noExplicitAny": "off",
+        "noImplicitAnyLet": "error"
       }
     }
   },
@@ -38,14 +39,24 @@
     "formatWithErrors": false,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 120,
     "lineEnding": "lf",
-    "ignore": []
+    "lineWidth": 120
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "single",
-      "arrowParentheses": "asNeeded"
+      "arrowParentheses": "asNeeded",
+      "quoteStyle": "single"
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "recommended": true,
+      "source": {
+        "organizeImports": "on",
+        "useSortedAttributes": "on",
+        "useSortedProperties": "on"
+      }
     }
   }
 }

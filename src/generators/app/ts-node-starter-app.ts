@@ -2,9 +2,9 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import Generator from 'yeoman-generator';
-import type { Cli, CliArguments, CliOptions } from './cli.js';
-import { Options } from './options.js';
-import { Prompter } from './prompter.js';
+import type { Cli, CliArguments, CliOptions } from './cli.ts';
+import { Options } from './options.ts';
+import { Prompter } from './prompter.ts';
 
 export class TsNodeStarterApp extends Generator {
   #options = new Options();

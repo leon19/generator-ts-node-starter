@@ -96,7 +96,7 @@ describe('Generator ts-node-starter', () => {
 
         runResult = await helpers
           .run(generatorDir)
-          .withPrompts({
+          .withAnswers({
             description: '',
             name,
           })

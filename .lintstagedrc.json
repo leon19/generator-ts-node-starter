@@ -1,5 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/lintstagedrc.schema.json",
-  "{src,tests}/**/*.{ts,json}": ["biome check --apply-unsafe"],
+  "{src,tests}/**/*.{ts,json}": ["biome check --write --unsafe"],
   "*.md": ["prettier --write"]
 }
