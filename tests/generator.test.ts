@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker';
 import assert from 'yeoman-assert';
 import helpers, { type RunResult } from 'yeoman-test';
 
-const generatorDir = join(dirname(fileURLToPath(import.meta.url)), '../src/generators/app');
+const generatorDir = join(dirname(fileURLToPath(import.meta.url)), '../src/generators/app/index.ts');
 
 describe('Generator ts-node-starter', () => {
   let runResult: RunResult;

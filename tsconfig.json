@@ -119,8 +119,5 @@
   "exclude": [
     "node_modules",
     "generators"
-  ],
-  "ts-node": {
-    "transpileOnly": true
-  }
+  ]
 }
