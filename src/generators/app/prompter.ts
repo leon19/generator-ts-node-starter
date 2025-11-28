@@ -1,10 +1,14 @@
 import type Generator from 'yeoman-generator';
 
 export class Prompter {
-  constructor(private prompt: Generator['prompt']) {}
+  #prompt: Generator['prompt'];
+
+  constructor(prompt: Generator['prompt']) {
+    this.#prompt = prompt;
+  }
 
   async askProjectName(defaultName = ''): Promise<string> {
-    const { name } = await this.prompt({
+    const { name } = await this.#prompt({
       default: defaultName,
       message: 'Your project name',
       name: 'name',
@@ -19,7 +23,7 @@ export class Prompter {
   }
 
   async askDescription(): Promise<string> {
-    const { description } = await this.prompt({
+    const { description } = await this.#prompt({
       message: 'Your project description',
       name: 'description',
       type: 'input',
@@ -29,7 +33,7 @@ export class Prompter {
   }
 
   async askAuthorName(defaultAuthorName = ''): Promise<string> {
-    const { authorName } = await this.prompt({
+    const { authorName } = await this.#prompt({
       default: defaultAuthorName,
       message: 'Author name',
       name: 'authorName',
@@ -40,7 +44,7 @@ export class Prompter {
   }
 
   async askAuthorEmail(defaultAuthorEmail = ''): Promise<string> {
-    const { authorEmail } = await this.prompt({
+    const { authorEmail } = await this.#prompt({
       default: defaultAuthorEmail,
       message: 'Author email',
       name: 'authorEmail',
