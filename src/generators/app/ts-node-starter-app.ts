@@ -1,3 +1,4 @@
+import { spawnSync } from 'node:child_process';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -29,10 +30,13 @@ export class TsNodeStarterApp extends Generator {
   }
 
   async prompting(): Promise<void> {
+    const gitName = this._getGitConfig('user.name');
+    const gitEmail = this._getGitConfig('user.email');
+
     this.#options.project.name = await this.#prompter.askProjectName(this.cliName);
     this.#options.project.description = await this.#prompter.askDescription();
-    this.#options.author.name = await this.#prompter.askAuthorName(await this.git.name());
-    this.#options.author.email = await this.#prompter.askAuthorEmail(await this.git.email());
+    this.#options.author.name = await this.#prompter.askAuthorName(gitName);
+    this.#options.author.email = await this.#prompter.askAuthorEmail(gitEmail);
   }
 
   configuring(): void {
@@ -78,6 +82,21 @@ export class TsNodeStarterApp extends Generator {
   private _gitCommit() {
     this.spawnSync('git', ['add', '.']);
     this.spawnSync('git', ['commit', '--quiet', '-am', 'chore: initial commit', '--no-verify']);
+  }
+
+  private _getGitConfig(key: 'user.name' | 'user.email'): string | undefined {
+    const result = spawnSync('git', ['config', '--get', key], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
+
+    if (result.status !== 0) {
+      return undefined;
+    }
+
+    const value = result.stdout.trim();
+
+    return value || undefined;
   }
 
   private _cloneRepository() {
