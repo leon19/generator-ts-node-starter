@@ -8,17 +8,15 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [22.x, 24.x]
+        node-version: [ 22.x, 24.x, 25.x ]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
-      - run: git config --global user.email "you@example.com"
-      - run: git config --global user.name "Your Name"
       - run: npm install --global npm@latest
       - run: npm ci
-      - run: npm run build
-      - run: npm run cover
+      - run: node --run build
+      - run: node --run cover
