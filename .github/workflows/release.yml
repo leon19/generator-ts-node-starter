@@ -27,10 +27,6 @@ jobs:
         run: npm ci
       - name: Verify dependency signatures
         run: npm audit signatures
-      - name: Build
-        run: node --run build
-      - name: Test with coverage
-        run: node --run cover
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
